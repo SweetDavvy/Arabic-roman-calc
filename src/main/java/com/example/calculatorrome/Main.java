@@ -26,6 +26,9 @@ public class Main {
         int secondValue = Integer.parseInt(splitter[2]);
         String operator = splitter[1];
         String result;
+        if (splitter.length > 4) {
+            throw new IllegalArgumentException(input + " too much operators");
+        }
 
         switch (operator) {
             case "+":
@@ -54,6 +57,9 @@ public class Main {
         int secondValue = convertRomanToArab(splitter[2]);
         String operator = splitter[1];
         String result;
+        if (splitter.length > 4) {
+            throw new IllegalArgumentException(input + " too much operators");
+        }
 
         switch (operator) {
             case "+":
