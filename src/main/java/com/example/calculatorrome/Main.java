@@ -1,5 +1,6 @@
 package com.example.calculatorrome;
 
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -8,6 +9,7 @@ public class Main {
     public static String calc(String input) {
         String[] splitter = input.split("\\b");
         String firstValue = splitter[0];
+        String secondValue = splitter[2];
         String[] romanNumbers = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"};
         String result = input;
         for (String romanNumber : romanNumbers) {
@@ -30,23 +32,30 @@ public class Main {
             throw new IllegalArgumentException(input + " too much operators");
         }
 
-        switch (operator) {
-            case "+":
-                result = String.valueOf(firstValue + secondValue);
-                return result;
-            case "-":
-                result = String.valueOf(firstValue - secondValue);
-                return result;
-            case "/":
-                result = String.valueOf(firstValue / secondValue);
-                return result;
-            case "*":
-                result = String.valueOf(firstValue * secondValue);
-                return result;
-            default:
-                System.out.println("Wrong operator");
-                break;
+        if ((firstValue <= 10 && firstValue >= 1) && (secondValue <= 10 && secondValue >= 1)) {
+            switch (operator) {
+                case "+":
+                    result = String.valueOf(firstValue + secondValue);
+                    return result;
+                case "-":
+                    result = String.valueOf(firstValue - secondValue);
+                    return result;
+                case "/":
+                    result = String.valueOf(firstValue / secondValue);
+                    return result;
+                case "*":
+                    result = String.valueOf(firstValue * secondValue);
+                    return result;
+                default:
+                    System.out.println("Wrong operator");
+                    break;
+            }
+
+        } else {
+            throw new IllegalArgumentException(input + " out of range 1-10");
         }
+
+
         return null;
 
     }
@@ -60,23 +69,26 @@ public class Main {
         if (splitter.length > 4) {
             throw new IllegalArgumentException(input + " too much operators");
         }
-
-        switch (operator) {
-            case "+":
-                result = String.valueOf(firstValue + secondValue);
-                return convertArabToRoman(Integer.parseInt(result));
-            case "-":
-                result = String.valueOf(firstValue - secondValue);
-                return convertArabToRoman(Integer.parseInt(result));
-            case "/":
-                result = String.valueOf(firstValue / secondValue);
-                return convertArabToRoman(Integer.parseInt(result));
-            case "*":
-                result = String.valueOf(firstValue * secondValue);
-                return convertArabToRoman(Integer.parseInt(result));
-            default:
-                System.out.println("Wrong operator");
-                break;
+        if ((firstValue <= 10 && firstValue >= 1) && (secondValue <= 10 && secondValue >= 1)) {
+            switch (operator) {
+                case "+":
+                    result = String.valueOf(firstValue + secondValue);
+                    return convertArabToRoman(Integer.parseInt(result));
+                case "-":
+                    result = String.valueOf(firstValue - secondValue);
+                    return convertArabToRoman(Integer.parseInt(result));
+                case "/":
+                    result = String.valueOf(firstValue / secondValue);
+                    return convertArabToRoman(Integer.parseInt(result));
+                case "*":
+                    result = String.valueOf(firstValue * secondValue);
+                    return convertArabToRoman(Integer.parseInt(result));
+                default:
+                    System.out.println("Wrong operator");
+                    break;
+            }
+        }else {
+            throw new IllegalArgumentException(input + " out of range 1-10");
         }
         return null;
 
@@ -110,8 +122,8 @@ public class Main {
 
 
     public static String convertArabToRoman(int number) {
-        if ((number <= 0) || (number > 100)) {
-            throw new IllegalArgumentException(number + " is not in range (0,100)");
+        if ((number <= 1) || (number > 100)) {
+            throw new IllegalArgumentException(number + " is not in range (1,100)");
         }
 
         List<RomanNumeral> romanNumerals = RomanNumeral.getReverseSortedValues();
